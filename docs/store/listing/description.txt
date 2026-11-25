@@ -1,0 +1,41 @@
+Try a new hair colour before you commit. Lustra finds the hair in your photo, then lets you test natural shades, bold fashion colours, ombre, balayage and highlights, right on your iPhone or iPad. Compare looks side by side, keep your favourites, and save the result. It is free, there is no account, and your photos are never uploaded.
+
+TRY ON A COLOUR
+- Pick a photo from your library, take one with the camera, or start from a sample photo built into the app
+- Choose from natural shades and fashion colours, or set your own custom colour
+- The colour keeps the natural light, shadows and shine of your photo, so the result looks like hair and not like paint
+- Intensity, shine and brightness sliders let you go from a soft tint to a bold change
+- Cover gray: see how gray roots look with colour on top
+
+COLOUR STYLES
+- Solid colour for a full change
+- Ombre: blend one colour into another from roots to ends, and move the blend where you like
+- Balayage: a soft, hand-painted look with lighter ends
+- Highlights: add lighter streaks through your colour
+- Two-tone: split the hair into two colours
+- Root shadow: a darker root that grows into your colour
+
+FINISH IT PROPERLY
+- Refine brush: add hair the detection missed, or erase colour that landed on the wrong spot
+- Smooth and strand definition tools soften frizz and bring out strands, applied to the hair only
+- Before and after slider to check the change at a glance
+- Undo and redo for every edit
+
+COMPARE AND SAVE
+- Palette grid: see several colours on the same photo at once, then export the whole grid as one picture
+- Saved looks: keep the colours you love on your device and open them again on another photo
+- Save to Photos or Files, or share your result
+
+HELPFUL HINTS
+Lustra tells you when a photo is blurry, dark, very small, or has no clear face, and when a hat or scarf may be covering the hair. If a photo has more than one person, choose the one you want to edit. A clear photo where the hair is visible gives the most natural result.
+
+PRIVATE BY DESIGN
+Hair detection runs on your device. Your photos are never uploaded, and there is no account to create. Lustra shows an on-screen preview of how a colour could look. It does not change your real hair, and real dye results vary with your starting colour and lighting.
+
+FREE, WITH ADS
+Lustra is free. Ads from Google AdMob pay for it: a banner on the Home screen and, before you save or share, one short video that you choose to watch. A comparison grid counts as one export. If no ad is available, your export goes ahead without one. If you allow tracking when iOS asks, the ads may use your advertising identifier. The app works the same either way.
+
+WHAT LUSTRA IS NOT
+Lustra is for hair colour. It does not offer haircut, hair styling or wig try-on.
+
+Questions or ideas? Write to support@ecomswiftllc.com.
