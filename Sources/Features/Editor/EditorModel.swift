@@ -497,7 +497,7 @@ final class EditorRenderPipeline: @unchecked Sendable {
 /// Renders small, cropped thumbnails one at a time at low priority.
 final class EditorThumbPipeline: @unchecked Sendable {
     private let session: HairSession
-    private let queue = DispatchQueue(label: "app.lustra.editor.thumbs", qos: .utility)
+    private let queue = DispatchQueue(label: "app.lustra.editor.thumbs", qos: .userInitiated)
     private let lock = NSLock()
     private var generation = 0
     // Only touched on `queue`.

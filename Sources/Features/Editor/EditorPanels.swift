@@ -220,7 +220,7 @@ struct EditorComparePanel: View {
     @ObservedObject var model: EditorModel
     @ObservedObject var store: LooksStore
 
-    private let columns: [GridItem] = [GridItem(.adaptive(minimum: 92, maximum: 150), spacing: 10)]
+    private let columns: [GridItem] = [GridItem(.adaptive(minimum: 76, maximum: 150), spacing: 10)]
 
     var body: some View {
         EditorPanelScroll {

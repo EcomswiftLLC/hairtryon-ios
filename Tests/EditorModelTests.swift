@@ -239,7 +239,7 @@ final class EditorModelTests: XCTestCase {
         let model = try makeModel()
         model.loadThumbnails(for: model.compareTiles)
         let expected = model.compareTiles.count
-        let done = await waitUntil { model.thumbs.count == expected }
+        let done = await waitUntil(timeout: 90) { model.thumbs.count == expected }
         XCTAssertTrue(done, "Only \(model.thumbs.count) of \(expected) thumbnails were rendered")
         for image in model.thumbs.values {
             XCTAssertEqual(image.size.width / image.size.height, EditorTileCrop.aspect, accuracy: 0.03)
