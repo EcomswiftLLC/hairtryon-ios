@@ -29,7 +29,7 @@ PLUM = (118, 74, 112)          # soft counterweight low on the right
 # (capture name, headline lines, supporting line). Copy is limited to what the app does (docs/PRODUCT-SPEC.md).
 SLIDES = [
     ("home-filled", ["Try a new hair", "color first."], "A free hair color try-on. No account."),
-    ("editor-color", ["Natural shades", "to bold color."], "Pick a shade, or mix your own."),
+    ("editor-colour", ["Natural shades", "to bold color."], "Pick a shade, or mix your own."),
     ("editor-ombre", ["Ombre from", "roots to ends."], "Blend two colors through the hair."),
     ("editor-balayage", ["Soft balayage,", "lighter ends."], "A hand-painted look with sun-kissed tips."),
     ("editor-highlights", ["Highlights, soft", "or bold."], "Lighter streaks through your color."),
