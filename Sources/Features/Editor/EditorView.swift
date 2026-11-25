@@ -38,7 +38,7 @@ struct EditorView: View {
                 EditorTopBar(model: model, onClose: onClose)
                 switch kind {
                 case .stacked:
-                    stacked(height: geo.size.height)
+                    stacked(size: geo.size)
                 case .sidePanel:
                     sidePanel(width: geo.size.width)
                 case .sideRail:
@@ -62,8 +62,12 @@ struct EditorView: View {
         )
     }
 
-    private func stacked(height: CGFloat) -> some View {
-        let panelHeight: CGFloat = min(max(height * 0.40, 300), 460)
+    private func stacked(size: CGSize) -> some View {
+        // The photo gets the height it needs at the full width (plus the compare chips); the panel takes the rest.
+        let photoWidth: CGFloat = max(1, size.width - 28)
+        let photoNeeds: CGFloat = photoWidth / max(0.3, model.aspect) + EditorCanvas.chipStrip + 12
+        let available: CGFloat = size.height - 56 - 8 - 4 - 8
+        let panelHeight: CGFloat = min(max(available - photoNeeds, 320), 560)
         return VStack(spacing: 8) {
             EditorCanvas(model: model)
             VStack(spacing: 0) {

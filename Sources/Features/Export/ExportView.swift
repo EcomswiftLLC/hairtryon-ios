@@ -190,7 +190,7 @@ struct ExportView: View {
                 } else {
                     ScrollView {
                         VStack(spacing: LS.Space.l) {
-                            preview.frame(height: min(geo.size.height * 0.52, 560))
+                            preview.frame(height: min(geo.size.height * 0.58, 640))
                             controls
                         }
                         .padding(.horizontal, LS.Space.m)
@@ -258,7 +258,7 @@ struct ExportView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
                         .overlay(RoundedRectangle(cornerRadius: 18, style: .continuous).strokeBorder(LS.Palette.line, lineWidth: 1))
                         .padding(.top, 56)
-                        .accessibilityLabel(Text("Your colour comparison"))
+                        .accessibilityLabel(Text("Your color comparison"))
                 }
             }
         }
@@ -267,12 +267,12 @@ struct ExportView: View {
     private var controls: some View {
         VStack(alignment: .leading, spacing: LS.Space.m) {
             VStack(alignment: .leading, spacing: 6) {
-                Text(payload.kind == .single ? "Your new look" : "Your colour comparison")
+                Text(payload.kind == .single ? "Your new look" : "Your color comparison")
                     .apDisplay(30)
                     .accessibilityAddTraits(.isHeader)
                 Text(payload.kind == .single
                      ? "Drag across the photo to compare with your original."
-                     : "Every colour on your photo, side by side.")
+                     : "Every color on your photo, side by side.")
                     .font(LS.Font.callout)
                     .foregroundStyle(LS.Palette.mist)
                     .fixedSize(horizontal: false, vertical: true)
@@ -280,7 +280,7 @@ struct ExportView: View {
 
             VStack(spacing: LS.Space.s) {
                 Button { model.start(.photos) } label: {
-                    Label("Save to Photos", systemImage: "square.and.arrow.down")
+                    exportLabel("Save to Photos", symbol: "square.and.arrow.down")
                 }
                 .buttonStyle(.apPrimaryWide)
                 .disabled(!ready)
@@ -288,14 +288,14 @@ struct ExportView: View {
 
                 HStack(spacing: LS.Space.s) {
                     Button { model.start(.files) } label: {
-                        Label("Files", systemImage: "folder")
+                        exportLabel("Files", symbol: "folder")
                     }
                     .buttonStyle(.apSecondaryWide)
                     .disabled(!ready)
                     .accessibilityIdentifier("export.files")
 
                     Button { model.start(.share) } label: {
-                        Label("Share", systemImage: "square.and.arrow.up")
+                        exportLabel("Share", symbol: "square.and.arrow.up")
                     }
                     .buttonStyle(.apSecondaryWide)
                     .disabled(!ready)
@@ -330,7 +330,16 @@ struct ExportView: View {
 
             Button("Done") { dismiss() }
                 .buttonStyle(.apQuiet)
+                .frame(maxWidth: .infinity)
                 .accessibilityIdentifier("export.done")
+        }
+    }
+
+    /// Same icon box for every button, so Files and Share (different symbol heights) end up the same height.
+    private func exportLabel(_ title: String, symbol: String) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: symbol).frame(width: 22, height: 22)
+            Text(title)
         }
     }
 
