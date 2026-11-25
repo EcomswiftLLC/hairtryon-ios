@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Licences | Hair Color Changer: Lustra</title>
+<meta name="description" content="Open-source and third-party notices for Lustra: the MediaPipe hair segmenter (Apache License 2.0), Google Mobile Ads and the sample photo credits from Pexels.">
+<link rel="canonical" href="https://ecomswiftllc.github.io/lustra/licenses/">
+<meta name="theme-color" content="#0C0A0F">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hair Color Changer: Lustra">
+<meta property="og:title" content="Licences | Hair Color Changer: Lustra">
+<meta property="og:description" content="Open-source and third-party notices for Lustra: the MediaPipe hair segmenter (Apache License 2.0), Google Mobile Ads and the sample photo credits from Pexels.">
+<meta property="og:url" content="https://ecomswiftllc.github.io/lustra/licenses/">
+<meta property="og:image" content="https://ecomswiftllc.github.io/lustra/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Lustra app icon, a lock of hair drawn in rose-gold strands, next to the name Hair Color Changer: Lustra">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Licences | Hair Color Changer: Lustra">
+<meta name="twitter:description" content="Open-source and third-party notices for Lustra: the MediaPipe hair segmenter (Apache License 2.0), Google Mobile Ads and the sample photo credits from Pexels.">
+<meta name="twitter:image" content="https://ecomswiftllc.github.io/lustra/assets/og-image.png">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/lustra-mark.svg" alt="" width="34" height="34">Lustra</a>
+    <nav class="nav" aria-label="Main">
+      <a href="../#colour">Colour</a>
+      <a href="../#compare">Compare</a>
+      <a href="../#private">Privacy</a>
+      <a href="../#free">Free with ads</a>
+      <a href="../#faq">FAQ</a>
+      <a href="../support/">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page">
+    <div class="wrap">
+      <article class="doc">
+        <h1>Licences</h1>
+        <p class="lede">Lustra uses a few things made by others. Here is what they are and under which terms.</p>
+
+        <h2>MediaPipe hair segmenter</h2>
+        <p>Lustra finds hair with a Core ML conversion of the MediaPipe hair segmenter, made by Google LLC and released under the Apache License, Version 2.0. The model runs on your device. We changed only its file format and made mathematically exact simplifications: the three custom layers were rebuilt from standard operations, an unused input channel was dropped, and the two output classes were merged into one. We did not retrain or fine-tune it. The changes are listed in <a href="https://github.com/EcomswiftLLC/hairtryon-ios/blob/main/docs/licences/hair-segmenter.md" rel="noopener">our public licence notes</a>. The weights are used under the Apache License, Version 2.0.</p>
+        <p>Source: <a href="https://developers.google.com/edge/mediapipe/solutions/vision/image_segmenter" rel="noopener">developers.google.com/edge/mediapipe</a>. The model card asks to cite: A. Tkachenka, G. Karpushin, A. Vakunov and V. Tkachenka, "Real-time Hair Segmentation and Recoloring on Mobile GPUs", CVPR Workshop on Computer Vision for Augmented and Virtual Reality, 2019.</p>
+        <p>The model was built for single-person selfies. It can be less reliable with several people, hats and scarves, thin or braided hair, low light and motion blur, which is why Lustra offers a refine brush.</p>
+        <details class="fold"><summary>Apache License 2.0, full text</summary><pre class="licence-text" tabindex="0">                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      &quot;License&quot; shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      &quot;Licensor&quot; shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      &quot;Legal Entity&quot; shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      &quot;control&quot; means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      &quot;You&quot; (or &quot;Your&quot;) shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      &quot;Source&quot; form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      &quot;Object&quot; form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      &quot;Work&quot; shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      &quot;Derivative Works&quot; shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      &quot;Contribution&quot; shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, &quot;submitted&quot;
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as &quot;Not a Contribution.&quot;
+
+      &quot;Contributor&quot; shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a &quot;NOTICE&quot; text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an &quot;AS IS&quot; BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets &quot;[]&quot;
+      replaced with your own identifying information. (Don&#x27;t include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same &quot;printed page&quot; as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.</pre></details>
+
+        <h2>Google Mobile Ads SDK and User Messaging Platform</h2>
+        <p>Lustra shows ads with the Google Mobile Ads SDK (Google AdMob) and asks for consent where required with Google's User Messaging Platform SDK. Both are provided by Google LLC under Google's own terms, not as open-source software. They include third-party notices that Google publishes with the SDKs. See the <a href="https://developers.google.com/admob/terms" rel="noopener">Google AdMob terms</a>, the <a href="https://developers.google.com/admob/ios/quick-start" rel="noopener">Google Mobile Ads SDK for iOS</a> pages and the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>. What the SDK collects is explained in our <a href="../privacy/">privacy policy</a>.</p>
+
+        <h2>Apple frameworks</h2>
+        <p>Lustra uses system frameworks from Apple, such as Vision for face detection, Core ML, the photo picker and the share sheet, under Apple's developer terms.</p>
+
+        <h2>Sample photos</h2>
+        <p>The photos built into the app are from <a href="https://www.pexels.com" rel="noopener">Pexels</a> and are used under the <a href="https://www.pexels.com/license/" rel="noopener">Pexels License</a>, which allows free use including commercial use and modification. Attribution is not required, and we credit the photographers here. The photos were resized and recompressed, with no other edits. The coloured pictures on the home page are illustrations made from one of these photos with a simple colour overlay.</p>
+        <table>
+          <thead><tr><th>File</th><th>Photographer</th><th>Source</th></tr></thead>
+          <tbody>
+<tr><td>long-black-back.jpg</td><td>kaboompics</td><td><a href="https://www.pexels.com/photo/flowers-on-a-woman-s-hair-8556895/" rel="noopener">Pexels page</a></td></tr>
+<tr><td>auburn-straight-back.jpg</td><td>Rachel Claire</td><td><a href="https://www.pexels.com/photo/back-view-of-a-woman-with-long-hair-7276593/" rel="noopener">Pexels page</a></td></tr>
+<tr><td>ombre-golden-back.jpg</td><td>Lyn [Lynbot] Michelle</td><td><a href="https://www.pexels.com/photo/a-back-view-of-a-woman-in-denim-jacket-with-a-curly-hair-6391646/" rel="noopener">Pexels page</a></td></tr>
+<tr><td>blonde-wavy-back.jpg</td><td>Casa Rio Beauty Salon</td><td><a href="https://www.pexels.com/photo/blonde-wavy-hair-in-dubai-salon-setting-41062003/" rel="noopener">Pexels page</a></td></tr>
+<tr><td>balayage-wavy-back.jpg</td><td>Adrianna CA</td><td><a href="https://www.pexels.com/photo/beautiful-long-hair-of-woman-23384615/" rel="noopener">Pexels page</a></td></tr>
+<tr><td>silver-long-back.jpg</td><td>cottonbro studio</td><td><a href="https://www.pexels.com/photo/back-view-of-an-elderly-woman-with-gray-hair-7450296/" rel="noopener">Pexels page</a></td></tr>
+<tr><td>copper-bob-back.jpg</td><td>kaboompics</td><td><a href="https://www.pexels.com/photo/back-view-of-a-woman-7273415/" rel="noopener">Pexels page</a></td></tr>
+<tr><td>dark-brown-straight-back.jpg</td><td>Hairlust Official</td><td><a href="https://www.pexels.com/photo/elegant-asian-woman-with-long-silky-hair-35267456/" rel="noopener">Pexels page</a></td></tr>
+          </tbody>
+        </table>
+
+        <h2>Questions</h2>
+        <p>If you think a notice is missing or wrong, write to <span class="email">support@ecomswiftllc.com</span>.</p>
+      </article>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h2>Hair Color Changer: Lustra</h2>
+      <p>A free hair colour try-on for iPhone and iPad. Your photos are processed on your device. Not on the App Store yet.</p>
+    </div>
+    <nav aria-label="Footer">
+      <h2>Pages</h2>
+      <ul>
+        <li><a href="../">Home</a></li>
+        <li><a href="../support/">Support</a></li>
+        <li><a href="../privacy/">Privacy policy</a></li>
+        <li><a href="../terms/">Terms of use</a></li>
+        <li><a href="../licenses/">Licences</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2>Ecom Swift LLC</h2>
+      <p>30 N Gould St #37906<br>Sheridan, WY 82801<br>United States</p>
+      <p class="email">support@ecomswiftllc.com</p>
+    </div>
+    <p class="legalline">&copy; 2026 Ecom Swift LLC. Apple, iPhone, iPad and the App Store are trademarks of Apple Inc. Lustra is not affiliated with Apple or Google. Sample photos are from Pexels. The colour pictures on this site are illustrations.</p>
+  </div>
+</footer>
+</body>
+</html>
