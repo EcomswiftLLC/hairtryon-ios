@@ -13,7 +13,7 @@ from asc import api, pages
 
 APP_ID = "6839164457"
 SETS = [
-    ("APP_IPHONE_69", Path("design/store/6.9")),
+    ("APP_IPHONE_67", Path("design/store/6.9")),
     ("APP_IPAD_PRO_3GEN_129", Path("design/store/ipad13")),
 ]
 
