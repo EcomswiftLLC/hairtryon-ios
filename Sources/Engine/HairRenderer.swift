@@ -303,7 +303,7 @@ enum HairPixel {
         let n = 0.68 * n1 + 0.32 * n2
         // Noise values cluster around 0.5; move the threshold so that `amount` is roughly the covered share.
         let thr = 0.64 - 0.30 * amount
-        return smooth(thr - 0.05, thr + 0.05, n)
+        return smooth(thr - 0.13, thr + 0.13, n)
     }
 
     /// Colours one pixel. Returns nil when the pixel is left alone.
@@ -344,14 +344,17 @@ enum HairPixel {
             mix = smooth(start, end, t)
         case .balayage:
             let amount = Float(look.streakAmount)
-            let s = streaks(nx: nx, ny: ny, scaleX: 62, scaleY: 3.2, amount: amount, seed: 7)
+            // Hand-painted swaths drift sideways as they go down, like hair does, instead of running ruler-straight.
+            let nxw = nx + 0.035 * (noise(ny * 2.6, 0.5, 5) - 0.5) + 0.012 * (noise(ny * 9, 3.5, 6) - 0.5)
+            let s = streaks(nx: nxw, ny: ny, scaleX: 34, scaleY: 2.4, amount: amount, seed: 7)
             let ramp = smooth(Float(look.gradientStart) - 0.12, Float(look.gradientStart) + 0.30, t)
             // Streaks follow the real strand highlights a little, so they read as part of the hair.
             let follow = 0.65 + 0.35 * smooth(-6, 6, detail)
-            mix = min(1, s * ramp * follow * 1.05)
+            mix = min(0.92, s * ramp * follow)
         case .highlights:
             let amount = Float(look.streakAmount)
-            let s = streaks(nx: nx, ny: ny, scaleX: 150, scaleY: 6.5, amount: amount * 0.75, seed: 31)
+            let nxw = nx + 0.02 * (noise(ny * 3.4, 1.5, 15) - 0.5)
+            let s = streaks(nx: nxw, ny: ny, scaleX: 120, scaleY: 5.5, amount: amount * 0.75, seed: 31)
             let ramp = smooth(0.02, 0.2, t)
             let follow = 0.6 + 0.4 * smooth(-5, 5, detail)
             mix = min(1, s * ramp * follow)
@@ -372,6 +375,9 @@ enum HairPixel {
             bt *= 1 - 0.15 * root
         }
         Lt = min(96, max(1.5, Lt + Float(look.brightness) * 22))
+        // Real dye is never perfectly even: a slow, gentle variation in tone across the hair keeps the colour from looking painted.
+        let variation = noise(nx * 7, ny * 2.2, 41) - 0.5
+        Lt = min(96, max(1.5, Lt + variation * 7))
 
         // 3. Lightness: move the hair's own light and shade onto the new colour (with a lift for dark to light).
         let desiredRange = min(46, max(28, 46 - 0.45 * abs(Lt - 55)))
@@ -393,7 +399,7 @@ enum HairPixel {
         let lightFactor = 0.35 + 0.65 * smooth(2, 30, L1)
         let highFactor = 1 - smooth(88, 100, L1)
         let specDesat = 1 - spec * shine * 0.5
-        let f = lightFactor * highFactor * specDesat
+        let f = lightFactor * highFactor * specDesat * (0.9 + 0.1 * (1 - abs(variation) * 2))
 
         let lab = (L1, at * f, bt * f)
         let rgb = ColorMath.srgb(L: lab.0, a: lab.1, b: lab.2)

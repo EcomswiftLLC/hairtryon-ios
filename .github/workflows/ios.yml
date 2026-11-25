@@ -104,7 +104,7 @@ jobs:
           for SCREEN in $SCREENS; do
             xcrun simctl terminate "$DEST" com.ecomswift.lustra || true
             xcrun simctl launch "$DEST" com.ecomswift.lustra -lsScreen "$SCREEN" || true
-            sleep 10
+            sleep 24
             xcrun simctl io "$DEST" screenshot "shots/$SCREEN.png" || true
           done
           ls shots
@@ -173,7 +173,7 @@ jobs:
           for SCREEN in $SCREENS; do
             xcrun simctl terminate "$DEST" com.ecomswift.lustra || true
             xcrun simctl launch "$DEST" com.ecomswift.lustra -lsScreen "$SCREEN" || true
-            sleep 10
+            sleep 24
             xcrun simctl io "$DEST" screenshot "shots/$SCREEN.png" || true
           done
           ls shots
