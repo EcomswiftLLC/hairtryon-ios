@@ -1,0 +1,6 @@
+// Production AdMob ids for "Hair Color Changer: Lustra" (iOS). The release workflow refuses Google's test ids,
+// so this file must hold real ids before a release build can be uploaded.
+// Debug.xcconfig keeps Google's public test ids.
+ADMOB_APP_ID = ca-app-pub-3940256099942544~1458002511
+ADMOB_BANNER_UNIT_ID = ca-app-pub-3940256099942544/2435281174
+ADMOB_REWARDED_UNIT_ID = ca-app-pub-3940256099942544/1712485313
