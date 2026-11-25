@@ -1,0 +1,54 @@
+name: Convert hair model (Core ML)
+
+# Reproduces Sources/Resources/Models/HairSegmenter.mlpackage from the MediaPipe hair_segmenter.tflite (Apache-2.0).
+# Linux only (coremltools converts on Linux; it cannot RUN Core ML models there, so numerical verification is done on the
+# PyTorch graph and on the converted MIL program, see tools/convert_hair_model.py and tools/verify_hair_model.py).
+# Not triggered by ios.yml (paths ignored there).
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["model-*"]
+    paths:
+      - "tools/convert_hair_model.py"
+      - "tools/verify_hair_model.py"
+      - ".github/workflows/convert-model.yml"
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install converter dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch==2.7.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install "numpy<2.3" coremltools==9.0 tflite ai-edge-litert pillow mediapipe
+          python -c "import torch, coremltools as ct; print(torch.__version__, ct.__version__)"
+      - name: Download test portraits (Pexels, kept out of the repo)
+        run: |
+          mkdir -p build/photos
+          for id in 774909 415829 1239291 1130626 733872 1065084 91227 614810 1222271 1043471; do
+            curl -sSL --fail -o build/photos/p$id.jpg "https://images.pexels.com/photos/$id/pexels-photo-$id.jpeg?auto=compress&cs=tinysrgb&w=1000"
+          done
+          ls -l build/photos
+      - name: Convert (fp16 ML Program, iOS 17)
+        run: |
+          python tools/convert_hair_model.py --work build/model --out build/out/HairSegmenter.mlpackage \
+            --verify-dir build/photos --report build/out/convert-report.json
+          du -sh build/out/HairSegmenter.mlpackage
+          find build/out/HairSegmenter.mlpackage -type f | xargs ls -l
+      - name: Verify converted graph and compare with MediaPipe
+        run: |
+          python tools/verify_hair_model.py --work build/model --model build/out/HairSegmenter.mlpackage \
+            --photos build/photos --report build/out/verify-report.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hair-segmenter-coreml
+          path: |
+            build/out
+            build/model/hair_segmenter.tflite
