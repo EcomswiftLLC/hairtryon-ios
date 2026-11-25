@@ -68,7 +68,7 @@ if info:
             "sexualContentOrNudity": none, "violenceCartoonOrFantasy": none, "violenceRealistic": none,
             "violenceRealisticProlongedGraphicOrSadistic": none, "unrestrictedWebAccess": False,
             "userGeneratedContent": False, "messagingAndChat": False, "advertising": True,
-            "healthOrWellnessTopics": False, "parentalControls": False, "ageAssurance": False, "lootBox": False,
+            "healthOrWellnessTopics": False, "socialMedia": False, "parentalControls": False, "ageAssurance": False, "lootBox": False,
         }
         st, _ = api("PATCH", f"/v1/ageRatingDeclarations/{rid}", {"data": {"type": "ageRatingDeclarations", "id": rid, "attributes": attrs}})
         print("age rating status", st)
@@ -137,13 +137,12 @@ if free_point:
 step("availability")
 territories = [t["id"] for t in pages("/v1/territories?limit=200")]
 print(len(territories), "territories")
-territories = [t for t in territories if t != "CHN"]
 included = []
 rel = []
 for i, t in enumerate(territories):
     key = "${t%d}" % i
     rel.append({"type": "territoryAvailabilities", "id": key})
-    included.append({"type": "territoryAvailabilities", "id": key, "attributes": {"available": True},
+    included.append({"type": "territoryAvailabilities", "id": key, "attributes": {"available": t != "CHN"},
                       "relationships": {"territory": {"data": {"type": "territories", "id": t}}}})
 body = {"data": {"type": "appAvailabilities", "attributes": {"availableInNewTerritories": True}, "relationships": {
     "app": {"data": {"type": "apps", "id": APP_ID}}, "territoryAvailabilities": {"data": rel}}}, "included": included}
