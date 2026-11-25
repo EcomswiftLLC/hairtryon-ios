@@ -50,6 +50,7 @@ jobs:
       - name: Input experiments (whole photo vs face crop, overlays)
         run: |
           python tools/experiment_hair_input.py --work build/model --photos build/photos --out build/out/experiments
+          python tools/experiment_hair_input.py --work build/model --photos Tests/Fixtures/portraits --out build/out/experiments-fixtures
       - uses: actions/upload-artifact@v4
         if: always()
         with:
