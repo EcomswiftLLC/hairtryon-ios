@@ -50,7 +50,7 @@ final class HairModelTests: XCTestCase {
 
     func testModelInterfaceMatchesDocs() throws {
         let model = try loadModel()
-        let inputs = model.modelDescription.inputDescriptions
+        let inputs = model.modelDescription.inputDescriptionsByName
         XCTAssertEqual(inputs.count, 1)
         let input = try XCTUnwrap(inputs["image"], "input must be named image")
         XCTAssertEqual(input.type, .image)
@@ -58,7 +58,7 @@ final class HairModelTests: XCTestCase {
         XCTAssertEqual(constraint.pixelsWide, 512)
         XCTAssertEqual(constraint.pixelsHigh, 512)
 
-        let outputs = model.modelDescription.outputDescriptions
+        let outputs = model.modelDescription.outputDescriptionsByName
         XCTAssertEqual(outputs.count, 1)
         let output = try XCTUnwrap(outputs["hair_probability"], "output must be named hair_probability")
         XCTAssertEqual(output.type, .multiArray)
