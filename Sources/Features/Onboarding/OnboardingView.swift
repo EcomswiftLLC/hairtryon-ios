@@ -49,7 +49,8 @@ struct OnboardingView: View {
     private var hero: some View {
         ZStack {
             if let heroImage {
-                Image(uiImage: heroImage).resizable().scaledToFill()
+                // The photo only fills the frame it is given; it never decides the width of the screen.
+                Color.clear.overlay { Image(uiImage: heroImage).resizable().scaledToFill() }.clipped()
                 LinearGradient(colors: [.clear, LS.Palette.lens.opacity(0.7)], startPoint: .center, endPoint: .bottom)
             } else {
                 LinearGradient(colors: [LS.Palette.graphite, LS.Palette.carbon], startPoint: .topLeading, endPoint: .bottomTrailing)

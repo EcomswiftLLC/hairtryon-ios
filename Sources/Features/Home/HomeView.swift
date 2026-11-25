@@ -190,6 +190,7 @@ struct HomeView: View {
                                                 .offset(x: 8)
                                         }
                                     }
+                                    .padding(.trailing, saved.look.style.usesSecondary ? 8 : 0)
                                 Text(saved.name).font(LS.Font.label).foregroundStyle(LS.Palette.paper).lineLimit(1)
                             }
                             .padding(.horizontal, 14)
@@ -315,7 +316,7 @@ private struct SampleTile: View {
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             if let image {
-                Image(uiImage: image).resizable().scaledToFill()
+                Color.clear.overlay { Image(uiImage: image).resizable().scaledToFill() }.clipped()
             } else {
                 LS.Palette.graphite
             }

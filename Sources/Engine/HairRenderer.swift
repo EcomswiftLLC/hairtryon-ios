@@ -375,10 +375,12 @@ enum HairPixel {
 
         // 3. Lightness: move the hair's own light and shade onto the new colour (with a lift for dark to light).
         let desiredRange = min(46, max(28, 46 - 0.45 * abs(Lt - 55)))
-        let kc = min(1.7, max(0.7, desiredRange / p.sourceRange))
+        // Very dark or very flat hair has little light and shade of its own; allow a stronger remap so the new colour keeps depth.
+        let kcMax: Float = p.sourceRange < 26 ? 2.8 : 1.7
+        let kc = min(kcMax, max(0.7, desiredRange / p.sourceRange))
         let base = L - detail
         var L1 = Lt + (base - p.rootSource) * kc
-        var detailGain = min(1.8, max(0.8, kc)) * (1 + 0.8 * Float(look.definition)) * (1 - 0.8 * Float(look.smooth))
+        var detailGain = min(kcMax > 2 ? 2.6 : 1.8, max(0.8, kc)) * (1 + 0.8 * Float(look.definition)) * (1 - 0.8 * Float(look.smooth))
         if look.smooth > 0.001 { detailGain = max(0.1, detailGain) }
         L1 += detail * detailGain
         // Shine: lift the lightest strands of the original and keep them nearly neutral.
