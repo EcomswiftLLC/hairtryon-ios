@@ -14,11 +14,11 @@ on:
 
 env:
   # Every screen the debug build can open directly with `-lsScreen <name>` (see Sources/App/DebugScreens.swift).
-  SCREENS: "home"
+  SCREENS: "editor-colour editor-ombre editor-balayage editor-highlights editor-finish editor-refine compare-grid before-after looks hints home onboarding settings export"
 
   # The store captures (`-lsScreen shot-<name>`, see Sources/App/StoreScreens.swift): real bundled photos and clips, real views.
   # They are saved under exactly these names in the store-iphone and store-ipad artifacts.
-  STORE_SHOTS: "home"
+  STORE_SHOTS: "home-filled editor-colour editor-ombre editor-balayage editor-highlights compare-grid refine before-after looks export"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
