@@ -149,10 +149,11 @@ struct EditorTopBar: View {
                 Text("Save")
             }
             .buttonStyle(.apPrimary)
+            .padding(.leading, 8)
             .accessibilityHint(Text("Opens save and share options"))
             .accessibilityIdentifier("save-export")
         }
-        .padding(.horizontal, 8)
+        .padding(.horizontal, 14)
         .frame(height: 56)
     }
 }

@@ -21,12 +21,23 @@ struct EditorCanvas: View {
         return CGRect(x: (size.width - w) / 2, y: (size.height - h) / 2, width: w, height: h)
     }
 
+    /// Room under the photo for the compare chips (44 pt chip plus a gap).
+    static let chipStrip: CGFloat = 52
+
+    /// The photo and the chip row under it form one group, centred in the canvas, so no dead space separates them.
+    static func photoRect(aspect: CGFloat, in size: CGSize) -> CGRect {
+        let upper = CGSize(width: size.width, height: max(1, size.height - chipStrip))
+        let fitted: CGRect = fit(aspect: aspect, in: upper, inset: 6)
+        let top: CGFloat = max(0, (size.height - (fitted.height + chipStrip)) / 2)
+        return CGRect(x: fitted.minX, y: top, width: fitted.width, height: fitted.height)
+    }
+
     private var brushMode: Bool { model.tool == .refine && !model.splitMode }
     private var showsMatte: Bool { model.tool == .refine && model.showHairArea }
 
     var body: some View {
         GeometryReader { geo in
-            let rect: CGRect = EditorCanvas.fit(aspect: model.aspect, in: geo.size, inset: 6)
+            let rect: CGRect = EditorCanvas.photoRect(aspect: model.aspect, in: geo.size)
             ZStack(alignment: .topLeading) {
                 if model.splitMode {
                     BeforeAfterSlider(
@@ -35,7 +46,8 @@ struct EditorCanvas: View {
                         position: $model.splitFraction,
                         cornerRadius: 12
                     )
-                    .padding(6)
+                    .frame(width: rect.width, height: rect.height)
+                    .offset(x: rect.minX, y: rect.minY)
                 } else {
                     EditorGestureSurface(zoom: $zoom, offset: $offset, fitted: rect, brushMode: brushMode, onBrush: handleBrush)
                     zoomable(rect: rect)
@@ -43,7 +55,7 @@ struct EditorCanvas: View {
                         .scaleEffect(zoom)
                         .offset(offset)
                 }
-                overlays
+                overlays(rect: rect)
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .topLeading)
             .background(LS.Palette.lens)
@@ -176,8 +188,8 @@ struct EditorCanvas: View {
 
     // MARK: Overlays that do not zoom
 
-    private var overlays: some View {
-        ZStack {
+    private func overlays(rect: CGRect) -> some View {
+        ZStack(alignment: .topLeading) {
             VStack(spacing: 8) {
                 if !model.visibleHints.isEmpty {
                     EditorHintBanner(hints: Array(model.visibleHints.prefix(2))) {
@@ -186,23 +198,24 @@ struct EditorCanvas: View {
                 }
                 Spacer(minLength: 0)
             }
-            .padding(10)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .padding(8)
+            .frame(width: rect.width, height: rect.height, alignment: .top)
+            .offset(x: rect.minX, y: rect.minY)
 
-            if model.hairNotFound && model.tool != .refine {
-                noHairCard
+            ZStack {
+                if model.hairNotFound && model.tool != .refine {
+                    noHairCard
+                }
+                if model.renderedImage == nil || model.isSwitchingFace {
+                    EdBusyBadge(text: model.isSwitchingFace ? "Switching face" : "Coloring your hair")
+                }
             }
+            .frame(width: rect.width, height: rect.height)
+            .offset(x: rect.minX, y: rect.minY)
 
-            if model.renderedImage == nil || model.isSwitchingFace {
-                EdBusyBadge(text: model.isSwitchingFace ? "Switching face" : "Coloring your hair")
-            }
-
-            VStack {
-                Spacer(minLength: 0)
-                controls
-            }
-            .padding(10)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            controls
+                .frame(width: rect.width, height: EditorCanvas.chipStrip - 6, alignment: .center)
+                .offset(x: rect.minX, y: rect.maxY + 6)
 
             if zoom > 1.02 && !model.splitMode {
                 Button {

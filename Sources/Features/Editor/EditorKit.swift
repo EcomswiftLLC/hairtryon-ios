@@ -325,9 +325,12 @@ struct EditorToolBar: View {
             tool = t
         } label: {
             VStack(spacing: 3) {
-                Image(systemName: t.symbol).font(.system(size: 19, weight: .regular))
+                Image(systemName: t.symbol)
+                    .font(.system(size: 19, weight: .regular))
+                    .frame(height: 26)
                 Text(t.title).font(LS.Font.caption).lineLimit(1).minimumScaleFactor(0.7)
             }
+            .frame(maxHeight: .infinity, alignment: .center)
             .foregroundStyle(on ? LS.Palette.accent : LS.Palette.mist)
             .frame(maxWidth: wide, minHeight: 52)
             .frame(width: axis == .vertical ? 62 : nil)

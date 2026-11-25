@@ -167,15 +167,16 @@ enum DebugFixtures {
         var firstSession: HairSession? = nil
         var lastError: Error? = nil
         var index = max(0, preferred)
-        let attempts = min(3, photos.count)
+        // One attempt is normal (opening runs the hair model, which is slow on CI); a second only when almost no hair was found.
+        let attempts = min(2, photos.count)
         for _ in 0..<attempts {
             let photo = photos[index % photos.count]
             index += 1
-            guard let image = SampleLibrary.image(named: photo.name, maxPixel: 2400) else { continue }
+            guard let image = SampleLibrary.image(named: photo.name, maxPixel: 1600) else { continue }
             do {
                 let session = try await HairService.shared.open(image: image)
                 if firstSession == nil { firstSession = session }
-                if session.analysis.hairCoverage > 0.02 { return session }
+                if session.analysis.hairCoverage > 0.003 { return session }
             } catch {
                 lastError = error
                 break
