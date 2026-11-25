@@ -115,7 +115,7 @@ final class ReviewTracker {
 /// App Store links. The numeric id is known only after the ASC record exists (see AppLinks.appStoreID).
 enum AppLinks {
     /// Filled in once the app has an App Store id (ASC app id). While nil, the "Rate Lustra" row is hidden.
-    static let appStoreID: String? = nil
+    static let appStoreID: String? = "6839164457"
 
     static var writeReviewURL: URL? {
         guard let id = appStoreID, !id.isEmpty else { return nil }
