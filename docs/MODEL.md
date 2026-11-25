@@ -33,7 +33,7 @@ Swift (what `CoreMLHairSegmenter` in `Sources/Engine/HairSegmenter.swift` alread
 
 ## What works best on real photos
 
-Ten real Pexels portraits (head and shoulders, half length, a full-body shot, a side-lit face, dark and black-and-white) were run through the
+Ten real Pexels portraits (head and shoulders, half length, a full-body shot, a side-lit face, dark and black-and-white; table below) were run through the
 model with five inputs. There is no ground truth for stock photos, so the table uses proxies (mean of 10 photos): hair blobs = number of separate
 hair regions at p >= 0.5 (fewer = cleaner, spurious specks count as blobs), main blob = share of hair area in the largest region. Overlay sheets are
 produced by the CI job (artifact `hair-segmenter-coreml`, `out/experiments`) and were checked by eye.
@@ -46,12 +46,23 @@ produced by the CI job (artifact `hair-segmenter-coreml`, `out/experiments`) and
 | **Face crop 3.4 x 4.2 (centre 0.55 face heights below the face centre), square, grey padding** | **4.3** | 0.960 | **best**: cleanest, robust for small faces (full-body shot: whole-photo input produced a hair blob in the sky, the crop did not) |
 | Face crop 4.4 x 5.4 | 6.0 | 0.944 | head too small, specks return |
 
+The same five inputs were repeated on the 23 licensed fixtures in `Tests/Fixtures/portraits` (curly, afro, long, bob, silver, bald, beanie, hood, from
+behind, low light, a group of three, a landscape without a person). The blob count is noisier there (curls fragment the mask: stretch 12.8, letterbox 9.2, tight 12.2, **app 10.7**,
+wide 7.1; main-blob share 0.93 / 0.91 / 0.94 / **0.96** / 0.97), so the decision rests on the overlay sheets as well:
+
+* 2.6 x 3.2 clips the top of big hair (afro, long wavy): a straight horizontal cut across the hair.
+* 4.4 x 5.4 makes the head small: hair leaks onto garments (from-behind shot, hood shot) and the chin/neck of a small face is marked.
+* Whole photo stretched or letterboxed is fine for large heads but loses small heads (group of three: no hair at all) and
+  returns specks in the background; the face crop keeps full quality.
+* 3.4 x 4.2 had none of these faults on any of the 33 photos.
+
 **Recommendation: use a face-centred square crop (about 3.4 face widths wide, 4.2 face heights tall, centre shifted down by 0.55 face height from the face centre), stretched to 512. This is exactly what `HairSession.computeMatte` does.** Use the whole photo only when no
 face is found or the face is already large (crop side >= 0.9 of the long side, as the code does). Keep the head between roughly 20 and 40 percent of
 the crop width.
 
 ## Quirks and limits (from the model card and our tests)
 
+* A photo with no person can still produce hair (whole-photo input of a mountain landscape gave 19 percent hair coverage and a soft map): only trust the matte when a face was found (the engine's `noFace` hint) and clear it far away from the face.
 * One person per window. Several people merge into one hair mask: crop around the chosen face (already done) and fade the window edge.
 * Strong one-sided face shadow can be read as hair (seen on a side-lit male portrait, whole-photo and crop inputs alike): clear the inner face (Vision face rect, ellipse) from the matte before
   colouring.
