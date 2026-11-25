@@ -72,6 +72,9 @@ struct RewardedPolicy: Equatable {
 final class RewardedGate: NSObject, FullScreenContentDelegate {
     static let shared = RewardedGate()
 
+    /// True while a rewarded ad is on screen. The review prompt never appears then.
+    static var isAdOnScreen = false
+
     private var ad: RewardedAd?
     private var loadedAt: Date?
     private var loading = false
@@ -218,6 +221,7 @@ final class RewardedGate: NSObject, FullScreenContentDelegate {
         self.ad = nil
         earned = false
         proceed = action
+        RewardedGate.isAdOnScreen = true
         ad.present(from: presenter) { [weak self] in
             self?.earned = true
         }
@@ -226,6 +230,8 @@ final class RewardedGate: NSObject, FullScreenContentDelegate {
     // MARK: FullScreenContentDelegate
 
     func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
+        RewardedGate.isAdOnScreen = false
+        ReviewTracker.shared.recordAdDismissed()
         let action = proceed
         proceed = nil
         if earned {
@@ -257,6 +263,7 @@ final class RewardedGate: NSObject, FullScreenContentDelegate {
 
     func ad(_ ad: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
         AdsLog.logger.info("Rewarded ad failed to present: \(error.localizedDescription, privacy: .public)")
+        RewardedGate.isAdOnScreen = false
         // The ad is what failed, not the person: let the export through.
         let action = proceed
         proceed = nil
