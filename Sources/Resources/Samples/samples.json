@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "note": "All samples show hair from behind so nobody is identifiable. Credits: docs/store/photo-credits.md",
+  "photos": [
+    {
+      "file": "long-black-back.jpg",
+      "title": "Long Black",
+      "blurb": "Sleek, long, black hair seen from behind. A clean base for bright colours.",
+      "credit": "Kaboompics, Pexels"
+    },
+    {
+      "file": "auburn-straight-back.jpg",
+      "title": "Auburn Lengths",
+      "blurb": "Long auburn hair against the sky and the city.",
+      "credit": "Rachel Claire, Pexels"
+    },
+    {
+      "file": "ombre-golden-back.jpg",
+      "title": "Golden Ombre",
+      "blurb": "Dark roots fading into golden waves.",
+      "credit": "Lyn [Lynbot] Michelle, Pexels"
+    },
+    {
+      "file": "blonde-wavy-back.jpg",
+      "title": "Blonde Waves",
+      "blurb": "Soft blonde waves, a good base for pastel and fashion colours.",
+      "credit": "Casa Rio Beauty Salon, Pexels"
+    },
+    {
+      "file": "balayage-wavy-back.jpg",
+      "title": "Balayage Waves",
+      "blurb": "Brown waves with sun-lightened ends.",
+      "credit": "Adrianna CA, Pexels"
+    },
+    {
+      "file": "silver-long-back.jpg",
+      "title": "Long Silver",
+      "blurb": "Long silver-gray hair on a plain wall.",
+      "credit": "cottonbro studio, Pexels"
+    },
+    {
+      "file": "copper-bob-back.jpg",
+      "title": "Copper Bob",
+      "blurb": "A short copper bob with warm highlights.",
+      "credit": "Kaboompics, Pexels"
+    },
+    {
+      "file": "dark-brown-straight-back.jpg",
+      "title": "Dark Brown Straight",
+      "blurb": "Long, straight, dark brown hair.",
+      "credit": "Hairlust Official, Pexels"
+    }
+  ]
+}
