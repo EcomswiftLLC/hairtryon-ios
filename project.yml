@@ -48,8 +48,6 @@ targets:
         CODE_SIGN_STYLE: Automatic
         SUPPORTS_MACCATALYST: NO
         SWIFT_STRICT_CONCURRENCY: minimal
-        # The bundled HairSegmenter.mlpackage is used through Vision; the generated Swift class would clash with Sources/Engine/HairSegmenter.swift.
-        COREML_CODEGEN_LANGUAGE: None
         TARGETED_DEVICE_FAMILY: "1,2"
   LustraTests:
     type: bundle.unit-test
