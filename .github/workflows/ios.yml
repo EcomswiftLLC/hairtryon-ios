@@ -3,6 +3,13 @@ name: iOS build, test and screenshots
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "website/**"
+      - "tools/**"
+      - "**.md"
+      - ".github/workflows/convert-model.yml"
+      - ".github/workflows/asc.yml"
   workflow_dispatch:
 
 env:
