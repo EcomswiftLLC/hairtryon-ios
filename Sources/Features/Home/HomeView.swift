@@ -130,7 +130,7 @@ struct HomeView: View {
 
     private var headline: some View {
         VStack(alignment: .leading, spacing: LS.Space.s) {
-            Text("Try a new hair colour.")
+            Text("Try a new hair color.")
                 .apDisplay(38)
                 .lineSpacing(-2)
                 .fixedSize(horizontal: false, vertical: true)
@@ -236,11 +236,11 @@ struct HomeView: View {
             LSSectionTitle(text: "What you can do")
                 .padding(.bottom, LS.Space.s)
             LSHairline()
-            feature("paintpalette", "30 shades and your own", "Natural, blonde, red and fashion colours, or pick any colour.")
+            feature("paintpalette", "30 shades and your own", "Natural, blonde, red and fashion colors, or pick any color.")
             LSHairline()
-            feature("wand.and.stars", "Ombre, balayage and highlights", "Blend two colours, add streaks, shadow the roots.")
+            feature("wand.and.stars", "Ombre, balayage and highlights", "Blend two colors, add streaks, shadow the roots.")
             LSHairline()
-            feature("square.grid.3x3", "Compare colours side by side", "See many colours on one photo and save the grid.")
+            feature("square.grid.3x3", "Compare colors side by side", "See many colors on one photo and save the grid.")
             LSHairline()
             feature("hand.draw", "Refine the hair area", "Brush hair in or out until the edge is right.")
             LSHairline()

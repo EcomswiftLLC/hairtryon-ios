@@ -28,13 +28,13 @@ PLUM = (118, 74, 112)          # soft counterweight low on the right
 
 # (capture name, headline lines, supporting line). Copy is limited to what the app does (docs/PRODUCT-SPEC.md).
 SLIDES = [
-    ("home-filled", ["Try a new hair", "colour first."], "A free hair colour try-on. No account."),
-    ("editor-colour", ["Natural shades", "to bold colour."], "Pick a shade, or mix your own."),
-    ("editor-ombre", ["Ombre from", "roots to ends."], "Blend two colours through the hair."),
+    ("home-filled", ["Try a new hair", "color first."], "A free hair color try-on. No account."),
+    ("editor-color", ["Natural shades", "to bold color."], "Pick a shade, or mix your own."),
+    ("editor-ombre", ["Ombre from", "roots to ends."], "Blend two colors through the hair."),
     ("editor-balayage", ["Soft balayage,", "lighter ends."], "A hand-painted look with sun-kissed tips."),
-    ("editor-highlights", ["Highlights, soft", "or bold."], "Lighter streaks through your colour."),
-    ("compare-grid", ["Compare colours", "side by side."], "One grid, saved as one picture."),
-    ("refine", ["Refine the edges", "with a brush."], "Add or remove colour exactly where you want it."),
+    ("editor-highlights", ["Highlights, soft", "or bold."], "Lighter streaks through your color."),
+    ("compare-grid", ["Compare colors", "side by side."], "One grid, saved as one picture."),
+    ("refine", ["Refine the edges", "with a brush."], "Add or remove color exactly where you want it."),
     ("before-after", ["Before and after,", "one drag."], "Slide across the photo to check every change."),
     ("looks", ["Keep the looks", "you love."], "Saved on your device. Open them on any photo."),
     ("export", ["Save or share,", "no watermark."], "One short ad per export. Editing is always free."),

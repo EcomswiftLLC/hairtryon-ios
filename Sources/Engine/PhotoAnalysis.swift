@@ -26,11 +26,11 @@ enum PhotoHint: Equatable {
         case .noFace:
             return "No face found. Hair is still detected, but a photo that shows the face works best."
         case .multipleFaces(let n):
-            return "\(n) faces found. Tap a face to choose whose hair to colour."
+            return "\(n) faces found. Tap a face to choose whose hair to color."
         case .blurry:
             return "This photo looks blurry, so hair edges may be soft. A sharper photo gives a cleaner result."
         case .lowLight:
-            return "This photo is dark. Colours look truer in good light."
+            return "This photo is dark. Colors look truer in good light."
         case .smallFace:
             return "The face is small in this photo. Move closer for a cleaner hair edge."
         case .hairHidden:

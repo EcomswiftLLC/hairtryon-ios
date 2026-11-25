@@ -37,7 +37,7 @@ struct SettingsView: View {
                         NavigationLink {
                             LicensesView()
                         } label: {
-                            LSRow(title: "Open-source licences", symbol: "text.book.closed")
+                            LSRow(title: "Open-source licenses", symbol: "text.book.closed")
                         }
                         .accessibilityIdentifier("settings.licences")
                         LSHairline()
@@ -101,7 +101,7 @@ struct LicensesView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: LS.Space.l) {
-                LSHeader(title: "Open-source licences", subtitle: "Lustra uses the work of others. Thank you.", size: 30)
+                LSHeader(title: "Open-source licenses", subtitle: "Lustra uses the work of others. Thank you.", size: 30)
 
                 notice(
                     title: "Hair detection model",

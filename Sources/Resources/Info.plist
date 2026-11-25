@@ -54,7 +54,7 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Lustra saves your finished photos to your library when you choose Save to Photos.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Lustra uses the camera when you choose to take a photo to try hair colours on. Photos stay on your device and are never uploaded.</string>
+	<string>Lustra uses the camera when you choose to take a photo to try hair colors on. Photos stay on your device and are never uploaded.</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>Your data is used to show you more relevant ads. You can use Lustra fully without allowing this.</string>
 	<key>GADApplicationIdentifier</key>
