@@ -2,21 +2,91 @@ import SwiftUI
 
 @main
 struct LustraApp: App {
+    @StateObject private var appState = AppState()
     @StateObject private var ads = AdsManager.shared
 
     init() {
         LSAppearance.configure()
+        ReviewTracker.shared.recordSessionStart()
+        // Files from an earlier export are no longer needed.
+        ExportActions.clearTemporaryFiles()
+        #if DEBUG
+        MainActor.assumeIsolated {
+            StoreScreens.homeFilledProvider = { AnyView(HomeView(debugFilled: true)) }
+        }
+        #endif
     }
 
     var body: some Scene {
         WindowGroup {
-            Text("Lustra")
-                .apDisplay()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .apScreen()
+            RootView()
+                .environmentObject(appState)
                 .environmentObject(ads)
                 .preferredColorScheme(.dark)
                 .tint(LS.Palette.accent)
         }
+    }
+}
+
+final class AppState: ObservableObject {
+    @Published var hasOnboarded: Bool {
+        didSet { UserDefaults.standard.set(hasOnboarded, forKey: "ls.hasOnboarded") }
+    }
+
+    init() {
+        hasOnboarded = UserDefaults.standard.bool(forKey: "ls.hasOnboarded")
+    }
+}
+
+/// Chooses between the welcome screen and the home screen, and starts ads only after the first frame
+/// and only once the person is past the welcome screen. Launch is never blocked by ads.
+struct RootView: View {
+    @EnvironmentObject private var appState: AppState
+    @EnvironmentObject private var ads: AdsManager
+    @State private var adsStarted = false
+
+    var body: some View {
+        ZStack {
+            #if DEBUG
+            if let screen = DebugScreens.requested {
+                if DebugAppScreens.handles(screen) {
+                    DebugAppScreens.view(for: screen)
+                } else {
+                    DebugScreens.view(for: screen)
+                }
+            } else {
+                content
+            }
+            #else
+            content
+            #endif
+        }
+        .apScreen()
+        .task(id: appState.hasOnboarded) { await startAdsWhenReady() }
+        .onChange(of: ads.adsReady) { _, ready in
+            if ready { RewardedGate.shared.preloadIfPossible() }
+        }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        if appState.hasOnboarded {
+            HomeView().transition(.opacity)
+        } else {
+            OnboardingView().transition(.opacity)
+        }
+    }
+
+    private func startAdsWhenReady() async {
+        #if DEBUG
+        if DebugScreens.requested != nil { return }
+        // UI tests pass `-lsNoAds YES` so Google's consent form (shown by region) cannot cover the controls under test.
+        if UserDefaults.standard.bool(forKey: "lsNoAds") { return }
+        #endif
+        guard appState.hasOnboarded, !adsStarted else { return }
+        try? await Task.sleep(nanoseconds: 400_000_000)
+        guard !Task.isCancelled, !adsStarted else { return }
+        adsStarted = true
+        await ads.start()
     }
 }
