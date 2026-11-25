@@ -28,7 +28,7 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq libegl1 libgles2 libgl1
           python -m pip install --upgrade pip
           pip install torch==2.7.0 --index-url https://download.pytorch.org/whl/cpu
-          pip install "numpy<2.3" coremltools==9.0 tflite ai-edge-litert pillow mediapipe
+          pip install "numpy<2.3" coremltools==9.0 tflite ai-edge-litert pillow mediapipe scipy
           python -c "import torch, coremltools as ct; print(torch.__version__, ct.__version__)"
       - name: Download test portraits (Pexels, kept out of the repo)
         run: |
@@ -47,6 +47,9 @@ jobs:
         run: |
           python tools/verify_hair_model.py --work build/model --model build/out/HairSegmenter.mlpackage \
             --photos build/photos --report build/out/verify-report.json
+      - name: Input experiments (whole photo vs face crop, overlays)
+        run: |
+          python tools/experiment_hair_input.py --work build/model --photos build/photos --out build/out/experiments
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -54,3 +57,37 @@ jobs:
           path: |
             build/out
             build/model/hair_segmenter.tflite
+
+  # Real Core ML runtime check (the Linux job cannot run Core ML). Optional: only needs a free macOS runner.
+  verify-coreml-macos:
+    needs: convert
+    runs-on: macos-14
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/download-artifact@v4
+        with:
+          name: hair-segmenter-coreml
+          path: build
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch==2.7.0 "numpy<2.3" coremltools==9.0 tflite ai-edge-litert pillow
+      - name: Download test portraits
+        run: |
+          mkdir -p build/photos
+          for id in 774909 415829 1239291 1130626 733872 1065084 91227 614810 1222271 1043471; do
+            curl -sSL --fail -o build/photos/p$id.jpg "https://images.pexels.com/photos/$id/pexels-photo-$id.jpeg?auto=compress&cs=tinysrgb&w=1000"
+          done
+      - name: Run converted model in Core ML and compare with TFLite
+        run: |
+          ls -R build | head -40
+          python tools/verify_coreml_macos.py --work build/model --model build/out/HairSegmenter.mlpackage             --photos build/photos --report build/out/coreml-runtime-report.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coreml-runtime-report
+          path: build/out/coreml-runtime-report.json
