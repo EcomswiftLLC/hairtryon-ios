@@ -1,6 +1,5 @@
-// Production AdMob ids for "Hair Color Changer: Lustra" (iOS). The release workflow refuses Google's test ids,
-// so this file must hold real ids before a release build can be uploaded.
+// Production AdMob ids for "Hair Color Changer: Lustra" (iOS), created 2026-11-25 in the Ecom Swift AdMob account.
 // Debug.xcconfig keeps Google's public test ids.
-ADMOB_APP_ID = ca-app-pub-3940256099942544~1458002511
-ADMOB_BANNER_UNIT_ID = ca-app-pub-3940256099942544/2435281174
-ADMOB_REWARDED_UNIT_ID = ca-app-pub-3940256099942544/1712485313
+ADMOB_APP_ID = ca-app-pub-8621573128492952~5003586562
+ADMOB_BANNER_UNIT_ID = ca-app-pub-8621573128492952/9761089220
+ADMOB_REWARDED_UNIT_ID = ca-app-pub-8621573128492952/1072527528
