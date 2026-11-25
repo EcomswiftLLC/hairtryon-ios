@@ -131,7 +131,7 @@ enum FaceAnalyzer {
         if longSide < 700 { hints.append(.lowResolution) }
         if hairCoverage < 0.003 {
             hints.append(.noHairFound)
-        } else if let s = selected, s < faces.count, hairCoverage < faces[s].area * 0.45 {
+        } else if let s = selected, s < faces.count, hairCoverage < Float(faces[s].area) * 0.45 {
             hints.append(.hairHidden)
         }
         return hints
