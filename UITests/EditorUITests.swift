@@ -46,8 +46,12 @@ final class EditorUITests: XCTestCase {
     func testEditorShowsItsKeyControls() {
         let app = openEditor("editor-colour")
         for id in ["close-editor", "undo", "redo", "save-export", "hold-compare", "split-toggle",
-                   "tool-colour", "tool-style", "tool-finish", "tool-refine", "tool-compare", "tool-looks",
-                   "swatch-Copper", "custom-color"] {
+                   "tool-colour", "tool-style", "tool-finish", "tool-refine", "tool-compare", "tool-looks"] {
+            XCTAssertTrue(element(app, id).waitForExistence(timeout: 10), "Missing control \(id)")
+        }
+        // The swatches sit further down the panel, so scroll to them first.
+        for id in ["swatch-Copper", "custom-color"] {
+            scrollIntoView(app, id)
             XCTAssertTrue(element(app, id).waitForExistence(timeout: 10), "Missing control \(id)")
         }
         XCTAssertFalse(element(app, "undo").isEnabled, "Nothing to undo on a fresh photo")
@@ -96,6 +100,7 @@ final class EditorUITests: XCTestCase {
         XCTAssertTrue(element(app, "brush-remove").exists)
         element(app, "brush-remove").tap()
         element(app, "tool-colour").tap()
+        scrollIntoView(app, "swatch-Copper")
         XCTAssertTrue(element(app, "swatch-Copper").waitForExistence(timeout: 10))
     }
 
@@ -104,6 +109,7 @@ final class EditorUITests: XCTestCase {
         element(app, "tool-compare").tap()
         let export = element(app, "export-grid")
         XCTAssertTrue(export.waitForExistence(timeout: 10))
+        scrollIntoView(app, "tile-Platinum")
         XCTAssertTrue(element(app, "tile-Platinum").waitForExistence(timeout: 10))
         element(app, "tile-Platinum").tap()
         XCTAssertTrue(element(app, "undo").isEnabled)
